@@ -11,6 +11,6 @@ These instructions assume a modern Linux operating system for development.
 * gcc
 * nasm
 * qemu
-* roxxiso
+* xorriso
 * virtualbox (for testing)
 
