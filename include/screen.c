@@ -5,7 +5,7 @@ void clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
         string vidmem=(string)0xb8000;
-        for(i;i<(sw*to*sd);i++)
+        for(;i<(sw*to*sd);i++)
         {
                 vidmem[i] = 0x0;
         }
@@ -34,7 +34,7 @@ void scrollUp(uint8 lineNumber)
         string vidmem = (string)0xb8000;
         uint16 i = 0;
         clearLine(0,lineNumber-1);                                            //updated
-        for (i;i<sw*(sh-1)*2;i++)
+        for (;i<sw*(sh-1)*2;i++)
         {
                 vidmem[i] = vidmem[i+sw*2*lineNumber];
         }
@@ -100,9 +100,9 @@ void printch(char c)
 
 void print (string ch)
 {
-        uint16 i = 0;
+        //uint16 i = 0;
         uint8 length = strlength(ch)-1;              //Updated (Now we store string length on a variable to call the function only once)
-        for(i;i<length;i++)
+        for(uint16 i=0;i<length;i++)
         {
                 printch(ch[i]);
         }

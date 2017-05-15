@@ -1,6 +1,6 @@
 #include "include/screen.h"
 
-kmain() {
+int kmain() {
   clearScreen();
   print("MyOS v0.0.1");
   //char* vidmem = (char*)0xb8000;
@@ -10,4 +10,5 @@ kmain() {
   cursorY = 10;
   updateCursor();
   print("Hello world");
+  return 0;
 }

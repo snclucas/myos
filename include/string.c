@@ -16,7 +16,7 @@ uint8 strEql(string ch1,string ch2)
         else 
         {
         uint8 i = 0;
-        for(i;i<=size;i++)
+        for(;i<=size;i++)
         {
                 if(ch1[i] != ch2[i]) result = 0;
         }

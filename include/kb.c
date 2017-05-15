@@ -1,8 +1,8 @@
 #include "kb.h"
 string readStr()
 {
-    char buff;
-    string buffstr;
+    //char buff;
+    string buffstr = NULL;
     uint8 i = 0;
     uint8 reading = 1;
     while(reading)
