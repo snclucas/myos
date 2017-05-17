@@ -4,7 +4,7 @@ const uint8 sw = 80,sh = 25,sd = 2;
 void clearLine(uint8 from,uint8 to)
 {
         uint16 i = sw * from * sd;
-        string vidmem=(string)0xb8000;
+        string vidmem=(string) SCREEN_FRAMEBUFFER_ADDR;
         for(;i<(sw*to*sd);i++)
         {
                 vidmem[i] = 0x0;
@@ -31,7 +31,7 @@ void clearScreen()
 
 void scrollUp(uint8 lineNumber)
 {
-        string vidmem = (string)0xb8000;
+        string vidmem = (string) SCREEN_FRAMEBUFFER_ADDR;
         uint16 i = 0;
         clearLine(0,lineNumber-1);                                            //updated
         for (;i<sw*(sh-1)*2;i++)
@@ -62,10 +62,12 @@ void newLineCheck()
 
 void printch(char c)
 {
-    string vidmem = (string) 0xb8000;     
+    string vidmem = (string) SCREEN_FRAMEBUFFER_ADDR;    
+    unsigned char fg = RED;
+    unsigned char bg = BLACK;
     switch(c)
     {
-        case (0x08):
+        case (0x08): //backspace
                 if(cursorX > 0) 
                 {
 	                cursorX--;									
@@ -83,8 +85,8 @@ void printch(char c)
                 cursorY++;
                 break;
         default:
-                vidmem [((cursorY * sw + cursorX))*sd] = c;
-                vidmem [((cursorY * sw + cursorX))*sd+1] = 0x0F;
+                vidmem [((cursorY * sh + cursorX))*sd] = c;
+                vidmem [((cursorY * sh + cursorX))*sd+1] = ((bg & 0x0F) << 4) | (fg & 0x0F);
                 cursorX++; 
                 break;
 	
@@ -106,7 +108,5 @@ void print (string ch)
         {
                 printch(ch[i]);
         }
-       /* while((ch[i] != (char)0) && (i<=length))
-                print(ch[i++]);*/
         
 }

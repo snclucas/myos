@@ -9,6 +9,6 @@ int kmain() {
   cursorX = 17;
   cursorY = 10;
   updateCursor();
-  print("Hello world");
+  print("Hello worlddd");
   return 0;
 }
